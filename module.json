@@ -9,7 +9,7 @@
     "esmodules": [
         "gm-token-drag-visibility.js"
     ],
-    "manifest": "https://github.com/MAClavell/gm-token-drag-visibility-v2/main/module.json",
+    "manifest": "https://raw.githubusercontent.com/MAClavell/GM-Token-Drag-Visibility-v2/main/module.json",
     "url": "https://github.com/MAClavell/gm-token-drag-visibility-v2",
     "download": "https://github.com/MAClavell/gm-token-drag-visibility-v2/releases/download/2.0/gm-token-drag-visibility-v2.0.zip"
 }

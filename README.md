@@ -4,4 +4,4 @@ A FoundryVTT module that disables the vision limitation when dragging a token as
 # Installation
 Works best with the [LibWrapper module](https://github.com/ruipin/fvtt-lib-wrapper) module installed.
 
-Install by inputting this manifest link into the module installer: https://github.com/MAClavell/gm-token-drag-visibility-v2/main/module.json
+Install by inputting this manifest link into the module installer: https://raw.githubusercontent.com/MAClavell/GM-Token-Drag-Visibility-v2/main/module.json
