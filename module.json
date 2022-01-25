@@ -3,7 +3,7 @@
     "title": "GM Token-Drag Visibility v2",   
     "description": "Disables the vision limitation when dragging a token as a GM. Useful for moving players between floors on the same map. Updated version of https://github.com/SteffanPoulsen/token-drag-visibility",   
     "author": "MAClavell, Steffan Poulsen",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "minimumCoreVersion": "0.8.8",
     "compatibleCoreVersion": "9",
     "esmodules": [
@@ -11,7 +11,7 @@
     ],
     "manifest": "https://raw.githubusercontent.com/MAClavell/GM-Token-Drag-Visibility-v2/main/module.json",
     "url": "https://github.com/MAClavell/gm-token-drag-visibility-v2",
-    "download": "https://github.com/MAClavell/gm-token-drag-visibility-v2/releases/download/2.0/gm-token-drag-visibility-v2.0.zip",
+    "download": "https://github.com/MAClavell/gm-token-drag-visibility-v2/releases/download/2.1.1/gm-token-drag-visibility-v2.1.1.zip",
     "bugs": "https://github.com/MAClavell/GM-Token-Drag-Visibility-v2/issues",
     "readme": "https://raw.githubusercontent.com/MAClavell/GM-Token-Drag-Visibility-v2/main/README.md"
 }
