@@ -12,7 +12,7 @@ Hooks.once('init', function() {
 
     libWrapper.register(MODULE_ID, 'Token.prototype._onDragLeftStart', (function() {
         return async function(wrapped, ...args) {
-            if (!game.user.isGM || !canvas.scene.data.tokenVision) {
+            if (!game.user.isGM || !canvas.scene.tokenVision) {
                 return wrapped.apply(this, args);
             }
 
@@ -21,7 +21,7 @@ Hooks.once('init', function() {
             //Check to see if any of the controlled tokens use sight
             //Check to see if any token is interactive
             for (let t of canvas.tokens.controlled) {
-                if (t.interactive && t.data.vision) {
+                if (t.interactive && t.document.sight.enabled) {
                     hasValidToken = true;
                     break;
                 }
@@ -33,13 +33,13 @@ Hooks.once('init', function() {
     
     libWrapper.register(MODULE_ID, 'Token.prototype._onDragLeftMove', (function() {
         return async function(wrapped, ...args) {
-            if (!game.user.isGM || !canvas.scene.data.tokenVision ||
+            if (!game.user.isGM || !canvas.scene.tokenVision ||
                 !inputDown || !hasValidToken) {
                     return wrapped.apply(this, args);
             }
 
-            canvas.scene.data.tokenVision = false;
-            canvas.sight.refresh();
+            canvas.scene.tokenVision = false;
+            canvas.perception.refresh();
 
             return wrapped.apply(this, args);
         }
@@ -52,8 +52,8 @@ Hooks.once('init', function() {
         inputDown = false;
     
         if (hasValidToken) {
-            canvas.scene.data.tokenVision = true;
-            canvas.sight.refresh();
+            canvas.scene.tokenVision = true;
+            canvas.perception.refresh();
             hasValidToken = false;
         }
     }
