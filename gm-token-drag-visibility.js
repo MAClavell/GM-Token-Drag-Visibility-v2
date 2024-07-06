@@ -39,7 +39,7 @@ Hooks.once('init', function() {
             }
 
             canvas.scene.tokenVision = false;
-            canvas.perception.refresh();
+            canvas.perception.update({ refreshVision: true });
 
             return wrapped.apply(this, args);
         }
@@ -53,7 +53,7 @@ Hooks.once('init', function() {
     
         if (hasValidToken) {
             canvas.scene.tokenVision = true;
-            canvas.perception.refresh();
+            canvas.perception.update({ refreshVision: true });
             hasValidToken = false;
         }
     }
