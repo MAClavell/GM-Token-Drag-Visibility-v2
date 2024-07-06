@@ -18,7 +18,7 @@
     }
   ],
   "compatibility": {
-    "minimum": "0.8.8",
+    "minimum": "12",
     "verified": "12"
   },
   "relationships": {
