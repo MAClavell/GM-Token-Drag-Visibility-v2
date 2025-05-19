@@ -2,48 +2,44 @@
 
 import {libWrapper} from './shim.js';
 
-let inputDown = false;
-let hasValidToken = false;
-
 Hooks.once('init', function() {
+    let inputDown = false;
+    let hasValidToken = false;
+
     const MODULE_NAME = "GM Token-Drag Visibility v2";
     const MODULE_ID = "gm-token-drag-visibility-v2";
     console.log(`Initializing "${MODULE_NAME}"`);
 
-    libWrapper.register(MODULE_ID, 'Token.prototype._onDragLeftStart', (function() {
-        return async function(wrapped, ...args) {
-            if (!game.user.isGM || !canvas.scene.tokenVision) {
-                return wrapped.apply(this, args);
+    libWrapper.register(MODULE_ID, 'CONFIG.Token.objectClass.prototype._onDragLeftStart', function (wrapped, ...args) {
+        if (!game.user.isGM || !canvas.scene.tokenVision) {
+            return wrapped(...args);
             }
 
-            inputDown = true;
+        inputDown = true;
         
-            //Check to see if any of the controlled tokens use sight
-            //Check to see if any token is interactive
-            for (let t of canvas.tokens.controlled) {
-                if (t.interactive && t.document.sight.enabled) {
-                    hasValidToken = true;
-                    break;
-                }
+        //Check to see if any of the controlled tokens use sight
+        //Check to see if any token is interactive
+        for (let t of canvas.tokens.controlled) {
+            if (t.interactive && t.document.sight.enabled) {
+                hasValidToken = true;
+                break;
             }
-
-            return wrapped.apply(this, args);
         }
-    })(), 'WRAPPER');
+
+        return wrapped(...args);
+    }, 'WRAPPER');
     
-    libWrapper.register(MODULE_ID, 'Token.prototype._onDragLeftMove', (function() {
-        return async function(wrapped, ...args) {
-            if (!game.user.isGM || !canvas.scene.tokenVision ||
-                !inputDown || !hasValidToken) {
-                    return wrapped.apply(this, args);
-            }
-
-            canvas.scene.tokenVision = false;
-            canvas.perception.update({ refreshVision: true });
-
-            return wrapped.apply(this, args);
+    libWrapper.register(MODULE_ID, 'CONFIG.Token.objectClass.prototype._onDragLeftMove', function (wrapped, ...args) {
+        if (!game.user.isGM || !canvas.scene.tokenVision ||
+            !inputDown || !hasValidToken) {
+                return wrapped(...args);
         }
-    })(), 'WRAPPER');
+
+        canvas.scene.tokenVision = false;
+        canvas.perception.update({ refreshVision: true });
+
+        return wrapped(...args);
+    }, 'WRAPPER');
 
     function EndDrag() {
         if (!game.user.isGM || !inputDown) {
@@ -58,17 +54,19 @@ Hooks.once('init', function() {
         }
     }
 
-    libWrapper.register(MODULE_ID, 'Token.prototype._onDragLeftDrop', (function() {
-        return async function(wrapped, ...args) {
+    libWrapper.register(MODULE_ID, 'CONFIG.Token.objectClass.prototype._onDragLeftDrop', function (wrapped, ...args) {
+        let result = wrapped(...args);
+        if (!args[0].interactionData.released) {
             EndDrag();
-            return wrapped.apply(this, args);
         }
-    })(), 'WRAPPER');
+        return result;
+    }, 'WRAPPER');
 
-    libWrapper.register(MODULE_ID, 'Token.prototype._onDragLeftCancel', (function() {
-        return async function(wrapped, ...args) {
+    libWrapper.register(MODULE_ID, 'CONFIG.Token.objectClass.prototype._onDragLeftCancel', function (wrapped, ...args) {
+        let result = wrapped(...args);
+        if (result !== false) {
             EndDrag();
-            return wrapped.apply(this, args);
         }
-    })(), 'WRAPPER');
+        return result;
+    }, 'WRAPPER');
 });
