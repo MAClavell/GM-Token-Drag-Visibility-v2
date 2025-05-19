@@ -7,4 +7,4 @@ Install from the Foundry module installer or by inputting this manifest link in 
 Works best with the [LibWrapper module](https://github.com/ruipin/fvtt-lib-wrapper) module installed.
 
 ### Issues
-Report any issues on the "Issues" page on this github or message me in the [FoundryVTT Discord](https://discord.gg/foundryvtt) at Joms#1636.
+Report any issues on the "Issues" page on this github or message me in the [FoundryVTT Discord](https://discord.gg/foundryvtt) at ".joms".
